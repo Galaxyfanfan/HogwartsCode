@@ -22,18 +22,15 @@ def setup_function(self):
 def teardown_function(self):
     print('函数级别：teardown_function 结束')
 
+def test_func():
+    print('test 函数')
 
-@pytest.fixture()
-def login():
-    print('登录')
-    username = 'jammy'
-    return username
 
 def getdatas():
     # 获取yaml数据
     with open('./datas/calc.yml', encoding='utf-8') as file:
         datas = yaml.safe_load(file)
-        print('--------------qqqq------------')
+        print('--------------datas------------')
         add = datas['add']
         sub = datas['sub']
         div = datas['div']
@@ -44,18 +41,18 @@ def getdatas():
 
 class TestCalculator:
     def setup_class(self):
+        # 实例化
+        self.calc = Calculator()
         print('类级别：setup_class 开始')
 
     def teardown_class(self):
         print('类级别：teardown_class 结束')
 
     def setup(self):
-        # 实例化
-        self.calc = Calculator()
-        print('开始')
+        print('开始计算')
 
     def teardown(self):
-        print('结束')
+        print('计算结束')
 
     # 参数化
     @pytest.mark.add
@@ -90,12 +87,12 @@ class TestCalculator:
 
 
 
-
+#
 # if __name__ == '__main__':
-    # pytest.main(['test_pytest.py'])
-    #  pytest test_pytest.py -v
-
-    # pytest.main(['test_pytest.py::TestDemo','-v'])
-    #python test_pytest.py
+#     pytest.main(['test_pytest.py'])
+#      pytest test_pytest.py -v
+#
+#     pytest.main(['test_pytest.py::TestDemo','-v'])
+#     python test_pytest.py
 
 
