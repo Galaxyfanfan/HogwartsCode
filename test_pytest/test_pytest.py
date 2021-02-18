@@ -5,7 +5,7 @@ pytest 命名规则
 类名：以 Test 开头
 方法名：以test_开头
 """
-
+import allure
 import pytest
 import yaml
 from Calculator.Calculator import Calculator
@@ -39,6 +39,7 @@ def getdatas():
 
     return [add,sub,div,mul,myids]
 
+@allure.feature('运算测试')
 class TestCalculator:
     def setup_class(self):
         # 实例化
@@ -49,13 +50,14 @@ class TestCalculator:
         print('类级别：teardown_class 结束')
 
     def setup(self):
-        print('开始计算')
+        print('setup-开始计算')
 
     def teardown(self):
-        print('计算结束')
+        print('teardown-计算结束')
 
     # 参数化
-    @pytest.mark.add
+    @allure.story('加法测试')
+    @pytest.mark.run(order=1)
     @pytest.mark.parametrize('a,b,expect',getdatas()[0],ids=getdatas()[4])
     # 加法
     def test_add(self,a,b,expect):
@@ -64,19 +66,25 @@ class TestCalculator:
         result = round(self.calc.add(a,b),2)
         assert expect == result
 
-    # 减法
-    @pytest.mark.parametrize('a,b,expect', getdatas()[1])
-    def test_sub(self,a,b,expect):
-        result = round(self.calc.sub(a,b),2)
-        assert expect == result
-
     # 除法
+    @allure.story('除法测试')
+    @pytest.mark.run(order=3)
     @pytest.mark.parametrize('a,b,expect', getdatas()[2])
     def test_div(self,a,b,expect):
         result = round(self.calc.div(a,b),2)
         assert expect == result
 
+    # 减法
+    @allure.story('减法测试')
+    @pytest.mark.run(order=2)
+    @pytest.mark.parametrize('a,b,expect', getdatas()[1])
+    def test_sub(self,a,b,expect):
+        result = round(self.calc.sub(a,b),2)
+        assert expect == result
+
     # 乘法
+    @allure.story('乘法测试')
+    @pytest.mark.run(order=4)
     @pytest.mark.parametrize('a,b,expect', getdatas()[3])
     def test_mul(self,a,b,expect):
         result = round(self.calc.mul(a,b),2)
