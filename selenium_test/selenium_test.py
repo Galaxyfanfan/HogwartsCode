@@ -9,7 +9,7 @@ from  time import  sleep
 class TestHogwards():
 
     def setup(self):
-        self.driver = webdriver.Firefox()
+        self.driver = webdriver.Chrome()
         self.driver.maximize_window()
         self.driver.implicitly_wait(5)#动态等待5秒
 
