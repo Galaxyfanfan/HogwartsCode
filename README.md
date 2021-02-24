@@ -10,8 +10,8 @@
 ###python pytest 测试实战 (二)
 路径:HogwartsCode/test_pytest
 
-###微信web端 微信登录 作业
-路径：HogwartsCode/weixin_po_20200822
+###web 企业微信实战（一）
+路径：HogwartsCode/weixin_login_work
 
 ###微信web端 添加部门 作业
 路径：HogwartsCode/weixin_po_20200822
